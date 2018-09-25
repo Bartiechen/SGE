@@ -119,3 +119,10 @@ pt-BR:
         password: 'Senha'
         password_confirmation: 'Confirmação de senha'
         remember_me: 'Lembre-me'
+    views:
+      pagination:
+        first: "&laquo; Início"
+        last: "Final &raquo;"
+        previous: "&lsaquo; Anterior"
+        next: "Próximo &rsaquo;"
+        truncate: "&hellip;"

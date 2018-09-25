@@ -12,6 +12,12 @@ Rails.application.routes.draw do
   authenticate :user do
     namespace :admin do
       root to: 'home#index'
+      resources :departments do
+        get '/members' => 'department_users#index'
+        delete '/members/:id' => 'department_users#destroy', as: 'destroy_member'
+        post '/add-manager' => 'department_users#add_manager'
+        post '/add-coordinator-event' => 'department_users#add_coordinator_event'
+      end
       resources :users, except: :destroy, constraints: { id: /[0-9]+/ }, concerns: :paginatable
       get 'users/search/(:term)/(page/:page)',
           to: 'users#index',

@@ -47,4 +47,36 @@ ActiveRecord::Schema.define(version: 2018_10_30_191328) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  create_table "department_roles", force: :cascade do |t|
+    t.bigint "department_id"
+    t.bigint "user_id"
+    t.bigint "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["department_id"], name: "index_department_roles_on_department_id"
+    t.index ["role_id"], name: "index_department_roles_on_role_id"
+    t.index ["user_id"], name: "index_department_roles_on_user_id"
+  end
+
+  create_table "departments", force: :cascade do |t|
+    t.string "name"
+    t.string "local"
+    t.string "phone"
+    t.string "initials"
+    t.string "email"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.string "flag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "department_roles", "departments"
+  add_foreign_key "department_roles", "roles"
+  add_foreign_key "department_roles", "users"
 end

@@ -16,6 +16,8 @@ class User < ApplicationRecord
   validates :alternative_email, allow_blank: true, format: { with: Devise.email_regexp }
   validates :cpf, cpf: true
 
+  has_many :department_roles, dependent: :destroy
+
   def username=(username)
     super
     self.email = (username + '@utfpr.edu.br')
