@@ -9,12 +9,3 @@ User.create_with(name: 'Administrador',
 role_list.each do |name, flag|
   Role.create(name: name, flag: flag)
 end
-
-department_role_list = [
-    [Department.first, User.first, Role.manager],
-    [Department.first, User.last, Role.coordinator]
-]
-
-department_role_list.each do |department, user, role|
-  DepartmentRole.create(department: department, user: user, role: role)
-end

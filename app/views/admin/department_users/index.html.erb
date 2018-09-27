@@ -1,25 +1,25 @@
 <% provide(:page_title, 'Adicionar membros ao departamento') %>
 <div class="row">
-  <div class="col-lg-6 col-md-6 col-sm-12">
+  <div class="col-12">
     <%= render 'admin/department_users/managers' %>
   </div>
-  <div class="col-lg-6 col-md-6 col-sm-12">
-    <%= render 'admin/department_users/coordinators-event' %>
-  </div>
 </div>
+
 <div class="row">
   <div class="col">
-    <% @users.each do |user| %>
+    <% @members.each do |member| %>
       <div class="col tag mt-1">
     <span class="col-6">
-      <%= user.user.name %>
+      <%= member.name %>
     </span>
-        <% if user.role.flag == 'manager' %>
-          <span class="col-5 tag-addon tag-danger"><%= user.role.name %></span>
+        <% if member.is_manager? %>
+          <span class="col-5 tag-addon tag-danger">Chefe de Departamento</span>
         <% else %>
-          <span class="col-5 tag-addon tag-success"><%= user.role.name %></span>
+          <% if member.is_coordinator? %>
+            <span class="col-5 tag-addon tag-success">Coordenador de Eventos</span>
+          <% end %>
         <% end %>
-        <%= link_to admin_department_destroy_member_path(@department, user), method: :delete, class: 'col-1 tag-addon' do %>
+        <%= link_to admin_department_destroy_member_path(@department, member), method: :delete, class: 'col-1 tag-addon' do %>
           <i class="fe fe-x"></i>
         <% end %>
       </div>

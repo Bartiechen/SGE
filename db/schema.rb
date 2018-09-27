@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2018_10_30_191328) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "department_roles", "departments"
-  add_foreign_key "department_roles", "roles"
-  add_foreign_key "department_roles", "users"
+  add_foreign_key "department_users", "departments"
+  add_foreign_key "department_users", "roles"
+  add_foreign_key "department_users", "users"
 end

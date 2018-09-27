@@ -1,5 +1,5 @@
 class Role < ApplicationRecord
-  has_many :department_roles, dependent: :destroy
+  has_many :department_users, dependent: :destroy
 
   def self.manager
     find_by_flag('manager')

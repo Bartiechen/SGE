@@ -1,18 +1,17 @@
 class Admin::DepartmentUsersController < Admin::BaseController
 
-  before_action :load_department, only: [:index, :add_manager, :add_coordinator_event, :destroy]
-  before_action :set_department_role, only: [:destroy]
+  before_action :load_department, only: [:index, :add_member, :destroy]
+  before_action :load_user, only: [ :destroy]
 
   def index
-    @users = DepartmentRole.users(@department).order(:role_id)
-    @user_role = DepartmentRole.new
+    @members = @department.users
+    @user_role = DepartmentUser.new
   end
 
-  def add_manager
-    @department_role = DepartmentRole.new( department_roles_params)
-    @department_role.department_id = @department.id
-    @department_role.role_id = Role.manager.id
-    if @department_role.save
+  def add_member
+    department_user = DepartmentUser.new(department_roles_params)
+    department_user.department_id = @department.id
+    if department_user.save
       flash[:success] = 'Chefe adicionado com sucesso.'
       redirect_to admin_department_members_path
     else
@@ -21,21 +20,8 @@ class Admin::DepartmentUsersController < Admin::BaseController
     end
   end
 
-  def add_coordinator_event
-    @department_role = DepartmentRole.new( department_roles_params)
-    @department_role.department_id = @department.id
-    @department_role.role_id = Role.coordinator.id
-    if @department_role.save
-      flash[:success] = 'Coordenador adicionado com sucesso.'
-      redirect_to admin_department_members_path
-    else
-      flash[:error] = 'Erro ao adicionar Coordenador.'
-      render :index
-    end
-  end
-
   def destroy
-    @department_role.destroy
+    @department.users.destroy(@user)
     flash[:success] = 'Usuário removido com sucesso.'
     redirect_to admin_department_members_path
   end
@@ -43,7 +29,11 @@ class Admin::DepartmentUsersController < Admin::BaseController
   private
 
   def set_department_role
-    @department_role = DepartmentRole.find(params[:id])
+    @department_role = DepartmentUser.find(params[:id])
+  end
+
+  def load_user
+    @user = User.find(params[:user_id])
   end
 
   def load_department
@@ -51,7 +41,7 @@ class Admin::DepartmentUsersController < Admin::BaseController
   end
 
   def department_roles_params
-    params.require(:department_role).permit(:user_id, :department_id)
+    params.require(:department_user).permit(:user_id, :department_id, :role_id)
   end
 
 end
