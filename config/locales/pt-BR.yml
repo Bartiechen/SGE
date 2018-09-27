@@ -4,16 +4,27 @@ pt-BR:
       department:
         one: "Departamento"
         other: "Departamentos"
+      role:
+        one: "Função"
+        other: "Funções"
+      user:
+        one: "Usuário"
+        other: "Usuários"
     attributes:
       attribute_commons: &commons
         name: "Nome"
+      department:
         phone: "Telefone"
         description: "Descrição"
-      department:
         initials: "Sigla"
         local: "Local"
         email: "Email do Departamento"
         responsible: "Responsável pelo Departamento"
+        <<: *commons
+      role:
+        flag: "Bandeira"
+        <<: *commons
+      user:
         <<: *commons
     views:
       pagination:

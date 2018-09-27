@@ -7,9 +7,8 @@ Rails.application.routes.draw do
     resources :departments do
 
       get '/members' => 'department_users#index'
-      delete '/members/:id' => 'department_users#destroy', as: 'destroy_member'
-      post '/add-manager' => 'department_users#add_manager'
-      post '/add-coordinator-event' => 'department_users#add_coordinator_event'
+      delete '/members/:user_id' => 'department_users#destroy', as: 'destroy_member'
+      post '/add-member' => 'department_users#add_member'
     end
   end
 

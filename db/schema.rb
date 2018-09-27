@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2018_09_19_154437) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "department_roles", force: :cascade do |t|
+  create_table "department_users", force: :cascade do |t|
     t.bigint "department_id"
     t.bigint "user_id"
     t.bigint "role_id"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2018_09_19_154437) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "department_roles", "departments"
-  add_foreign_key "department_roles", "roles"
-  add_foreign_key "department_roles", "users"
+  add_foreign_key "department_users", "departments"
+  add_foreign_key "department_users", "roles"
+  add_foreign_key "department_users", "users"
 end
