@@ -6,6 +6,13 @@ User.create_with(name: 'Administrador',
                  password: '123456',
                  support: true).find_or_create_by(email: 'admin@utfpr.edu.br')
 
-role_list.each do |name, flag|
-  Role.create(name: name, flag: flag)
+roles = [
+    ["Chefe de Departamento", :manager],
+    ["Coordenador de Evento", :event_coordinator],
+    ["Coordenador de Módulo", :module_coordinator],
+    ["Membro do Departamento", :member]
+]
+
+roles.each do |name, identifier|
+  Role.find_or_create_by!(name: name, identifier: identifier)
 end

@@ -1,7 +1,4 @@
 class Department < ApplicationRecord
-  has_many :department_users, dependent: :destroy
-  has_many :users, through: :department_users
-
   validates :name, presence: true
   validates :local, presence: true
   validates :phone, presence: true, length: {minimum: 10, maximum: 13}
@@ -10,15 +7,18 @@ class Department < ApplicationRecord
   validates :email, presence: true, uniqueness: true, length: { maximum: 255 },
             format: { with: VALID_EMAIL_REGEX }
 
+  has_many :department_users
+  has_many :users, through: :department_users
+
   def initials=(s)
     write_attribute(:initials, s.to_s.upcase) # The to_s is in case you get nil/non-string
   end
 
-  def managers
-    DepartmentUser.where(role_id: Role.manager.id, department_id: self.id)
+  def add_member(member, role)
+    department_users.create(user: member, role: Role.find_by(flag: role))
   end
 
-  def coordinators
-    DepartmentUser.where(role_id: Role.coordinator.id, department_id: self.id)
+  def remove_member(member, role)
+    department_users.destroy(user: member, role: Role.find_by(flag: role))
   end
 end

@@ -1,4 +1,4 @@
-class Admin::DepartmentsController < Admin::BaseController
+class Staff::DepartmentsController < Staff::BaseController
   before_action :set_department, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -7,42 +7,6 @@ class Admin::DepartmentsController < Admin::BaseController
   end
 
   def show
-  end
-
-  def new
-    @department = Department.new
-  end
-
-  def edit
-  end
-
-  def create
-    @department = Department.new(department_params)
-
-    if @department.save
-      flash[:success] = I18n.t('flash.actions.create.f',
-                               resource_name: Department.model_name.human)
-      redirect_to admin_department_path(@department)
-    else
-      flash[:error] = I18n.t('flash.actions.errors')
-      render :new
-    end
-  end
-
-  def update
-    if @department.update(department_params)
-      flash[:success] = I18n.t('flash.actions.update.f',
-                               resource_name: Department.model_name.human)
-      redirect_to admin_department_path(@department)
-    else
-      render :edit
-    end
-  end
-
-  def destroy
-    @department.destroy
-    flash[:success] = I18n.t('flash.actions.destroy.f', resource_name: Department.model_name.human)
-    redirect_to admin_departments_path
   end
 
   def members
@@ -61,7 +25,7 @@ class Admin::DepartmentsController < Admin::BaseController
     else
       flash[:error] = "Problemas na adição"
     end
-    redirect_to admin_department_members_path(@department)
+    redirect_to staff_department_members_path(@department)
   end
 
   def remove_member
@@ -72,7 +36,7 @@ class Admin::DepartmentsController < Admin::BaseController
     else
       flash[:error] = "Problemas na remoção"
     end
-    redirect_to admin_department_members_path(@department)
+    redirect_to staff_department_members_path(@department)
   end
 
   private

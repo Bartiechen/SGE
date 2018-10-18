@@ -1,0 +1,19 @@
+<tr>
+  <th><%= department.initials %></th>
+  <td><%= department.local %></td>
+  <td><%= department.email %></td>
+  <td><%= department.phone %></td>
+  <td>
+    <%= link_to staff_department_members_path(department) do %>
+        <span class="icon mr-3">
+        <i class="fe fe-user-plus" data-toggle="tooltip" data-placement="top" title="Adicionar Membros"></i>
+      </span>
+    <% end %>
+    <%= link_to staff_department_path(department) do %>
+      <span class="icon mr-3">
+      <i class="fe fe-eye" title='Visualizar' data-toggle="tooltip" data-placement="top"></i>
+      </span>
+    <% end %>
+  </td>
+</tr>
+

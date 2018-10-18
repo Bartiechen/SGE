@@ -71,12 +71,10 @@ ActiveRecord::Schema.define(version: 2018_10_30_191328) do
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
-    t.string "flag"
+    t.string "identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["identifier"], name: "index_roles_on_flag"
   end
 
-  add_foreign_key "department_users", "departments"
-  add_foreign_key "department_users", "roles"
-  add_foreign_key "department_users", "users"
 end

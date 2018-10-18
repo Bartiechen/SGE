@@ -4,21 +4,26 @@
   <td><%= department.email %></td>
   <td><%= department.phone %></td>
   <td>
-    <div class="btn-list float-right">
-      <%= link_to admin_department_members_path(department), class: "btn btn-icon mr-1", title: 'Adicionar Membros' do %>
-        <i class="fe fe-user-plus"></i>
-      <% end %>
-      <%= link_to admin_department_path(department), class: "btn btn-icon mr-1", title: 'Visualizar' do %>
-        <i class="fe fe-eye"></i>
-      <% end %>
-      <%= link_to edit_admin_department_path(department), class: "btn btn-icon mr-1", title: 'Editar' do %>
-        <i class="fe fe-edit"></i>
-      <% end %>
-      <%= link_to admin_department_path(department), method: :delete, class: "btn btn-icon mr-1",
-                  title: 'Deletar', data: {confirm: 'Are you sure?'} do %>
-        <i class="fe fe-trash-2"></i>
-      <% end %>
-    </div>
+    <%= link_to admin_department_members_path(department) do %>
+        <span class="icon mr-3">
+        <i class="fe fe-user-plus" data-toggle="tooltip" data-placement="top" title="Adicionar Membros"></i>
+      </span>
+    <% end %>
+    <%= link_to admin_department_path(department) do %>
+      <span class="icon mr-3">
+      <i class="fe fe-eye" title='Visualizar' data-toggle="tooltip" data-placement="top"></i>
+      </span>
+    <% end %>
+    <%= link_to edit_admin_department_path(department) do %>
+      <span class="icon mr-3">
+        <i class="fe fe-edit" title='Editar' data-toggle=tooltip" data-placement="top"></i>
+      </span>
+    <% end %>
+    <%= link_to admin_department_path(department), method: :delete, data: { confirm: t('prompt.confirm') } do %>
+        <span class="icon mr-3">
+        <i class="fe fe-trash" data-toggle="tooltip" data-placement="top" title="Remover"></i>
+      </span>
+    <% end %>
   </td>
 </tr>
 
