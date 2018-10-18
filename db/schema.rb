@@ -26,6 +26,17 @@ ActiveRecord::Schema.define(version: 2018_09_19_154437) do
     t.index ["user_id"], name: "index_department_roles_on_user_id"
   end
 
+  create_table "department_users", force: :cascade do |t|
+    t.bigint "department_id"
+    t.bigint "user_id"
+    t.bigint "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["department_id"], name: "index_department_users_on_department_id"
+    t.index ["role_id"], name: "index_department_users_on_role_id"
+    t.index ["user_id"], name: "index_department_users_on_user_id"
+  end
+
   create_table "departments", force: :cascade do |t|
     t.string "name"
     t.string "local"
@@ -39,9 +50,10 @@ ActiveRecord::Schema.define(version: 2018_09_19_154437) do
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
-    t.string "flag"
+    t.string "identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["identifier"], name: "index_roles_on_flag"
   end
 
   create_table "users", force: :cascade do |t|
@@ -50,7 +62,4 @@ ActiveRecord::Schema.define(version: 2018_09_19_154437) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "department_users", "departments"
-  add_foreign_key "department_users", "roles"
-  add_foreign_key "department_users", "users"
 end

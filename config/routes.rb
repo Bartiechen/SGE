@@ -5,10 +5,18 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'home#index'
     resources :departments do
+      get '/members' => 'departments#members'
+      post '/members' => 'departments#add_member'
+      delete '/members/:user_id' => 'departments#remove_member', as: 'remove_member'
+    end
+  end
 
-      get '/members' => 'department_users#index'
-      delete '/members/:user_id' => 'department_users#destroy', as: 'destroy_member'
-      post '/add-member' => 'department_users#add_member'
+  namespace :staff do
+    root to: 'home#index'
+    resources :departments, only: [:index, :show] do
+      get '/members' => 'departments#members'
+      post '/members' => 'departments#add_member'
+      delete '/members/:user_id' => 'departments#remove_member', as: 'remove_member'
     end
   end
 
