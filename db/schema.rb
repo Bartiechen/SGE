@@ -47,15 +47,15 @@ ActiveRecord::Schema.define(version: 2018_10_30_191328) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  create_table "department_roles", force: :cascade do |t|
+  create_table "department_users", force: :cascade do |t|
     t.bigint "department_id"
     t.bigint "user_id"
     t.bigint "role_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["department_id"], name: "index_department_roles_on_department_id"
-    t.index ["role_id"], name: "index_department_roles_on_role_id"
-    t.index ["user_id"], name: "index_department_roles_on_user_id"
+    t.index ["department_id"], name: "index_department_users_on_department_id"
+    t.index ["role_id"], name: "index_department_users_on_role_id"
+    t.index ["user_id"], name: "index_department_users_on_user_id"
   end
 
   create_table "departments", force: :cascade do |t|
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2018_10_30_191328) do
     t.string "identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["identifier"], name: "index_roles_on_flag"
+    t.index ["identifier"], name: "index_roles_on_identifier"
   end
 
 end
