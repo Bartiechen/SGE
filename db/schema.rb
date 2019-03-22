@@ -16,9 +16,6 @@ ActiveRecord::Schema.define(version: 2018_10_30_191328) do
   enable_extension "plpgsql"
   enable_extension "unaccent"
 
-# Could not dump table "clients" because of following StandardError
-#   Unknown type 'client_kinds' for column 'kind'
-
   create_table "department_users", force: :cascade do |t|
     t.bigint "department_id"
     t.bigint "user_id"

@@ -21,13 +21,14 @@ namespace :db do
 		20.times do |i|
 			email = Faker::Internet.unique.email
 			rn = 1_234_567 + i
+			bol = [true, false]
 			cpf = Faker::CPF.numeric
 			User.create!(name: Faker::Name.name,
 									 email: email,
 									 username: email.split('@')[0],
 									 registration_number: rn,
 									 cpf: cpf,
-									 admin: false, active: true,
+									 admin: bol.sample, active: bol.sample,
 									 password: '123456',
 									 support: false)
 
