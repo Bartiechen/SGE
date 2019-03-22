@@ -1,9 +1,10 @@
 class Staff::DepartmentsController < Staff::BaseController
-  before_action :set_department, only: [:show, :edit, :update, :destroy]
+  before_action :set_department, only: [ :show]
+  before_action :set_user, only: [:index, :show]
 
   def index
     # @users = User.order(:name).page params[:page]
-    @departments = Department.page(params[:page]).per(12)
+    @departments = @user.departments.page(params[:page]).per(12)
   end
 
   def show
@@ -40,6 +41,10 @@ class Staff::DepartmentsController < Staff::BaseController
   end
 
   private
+
+  def set_user
+    @user = current_user
+  end
 
   def set_department
     @department = Department.find(params[:id])

@@ -13,9 +13,9 @@ Rails.application.routes.draw do
     namespace :admin do
       root to: 'home#index'
       resources :departments do
-        get '/members' => 'department_users#index'
-        delete '/members/:user_id' => 'department_users#destroy', as: 'destroy_member'
-        post '/add-member' => 'department_users#add_member'
+        get '/members' => 'departments#members'
+        post '/members' => 'departments#add_member'
+        delete '/members/:user_id' => 'departments#remove_member', as: 'remove_member'
       end
       resources :users, except: :destroy, constraints: { id: /[0-9]+/ }, concerns: :paginatable
       get 'users/search/(:term)/(page/:page)',

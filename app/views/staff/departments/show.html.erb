@@ -19,11 +19,13 @@
 <div class="row m-2">
   <div class="col-12 department_description"><%= @department.description %></div>
 </div>
-<div class="row m-2">
-  <%= link_to staff_department_members_path(@department), title: "Membros", class: "btn btn-outline-secondary m-1" do %>
-    <i class="fe fe-users"> Ver Membros </i>
-  <% end %>
-</div>
+<% if @user.role_by(@department).identifier == 'manager' %>
+  <div class="row m-2">
+    <%= link_to staff_department_members_path(@department), title: "Membros", class: "btn btn-outline-secondary m-1" do %>
+      <i class="fe fe-users"> Ver Membros </i>
+    <% end %>
+  </div>
+<% end %>
 <div class="row m-2">
   <%= link_to staff_departments_path, title: "Voltar", class: "btn btn-outline-secondary m-1" do %>
     <i class="fe fe-arrow-left"> Voltar </i>
